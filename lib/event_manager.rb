@@ -34,9 +34,6 @@ def clean_regdate(reg_date)
   "#{formatted_regdate[0..2].join('/')} #{formatted_regdate[-2..-1].join(':')}"
 end
 
-@registered_hours = Hash.new(0)
-@registered_wdays = Hash.new(0)
-
 def time_manager(reg_date)
   reg_date_time = Time.strptime(reg_date, '%m/%d/%Y %H:%M')
   wday = reg_date_time.strftime('%A')
@@ -73,6 +70,8 @@ contents = CSV.open(
   header_converters: :symbol
 )
 
+@registered_hours = Hash.new(0)
+@registered_wdays = Hash.new(0)
 template_letter = File.read('form_letter.erb')
 erb_template = ERB.new template_letter
 
